@@ -3,7 +3,7 @@
 # Commands to build  docker image 
 
 ### to pull the git project and build the docker image
-* git clone https://github.com/aditya4196/kube-docker-demo.git
+* git clone https://github.com/ashwin25/kube-docker-demo.git
 * cd kube-docker-demo
 * docker build --tag docker-service:1.0 .
 
@@ -11,6 +11,13 @@
 * docker login -u=**dockerhub_userid** # your login to https://hub.docker.com/
 * docker tag docker-service:1.0 **dockerhub_userid**/docker-service:1.0
 * docker push **dockerhub_userid**/docker-service:1.0 
+
+Due to recent rate limits at dockerhub - you can also use quay.io
+* docker login quay.io
+* Username: ashwinprakash25
+* Password:
+* docker tag docker-service:1.0 quay.io/ashwinprakash25/docker-service:1.0
+* docker push quay.io/ashwinprakash25/docker-service:1.0
 
 # Commands to deploy docker image built above to openshift playground
 
@@ -23,7 +30,7 @@
 
 #### Pro Tip- use the **maximise button** to get a better experience of the console in openshift playground/katakoda
 ### To pull and run image in Openshift
-* oc new-app  ashwinprakash/docker-service:1.0
+* oc new-app  quay.io/ashwinprakash25/docker-service:1.0
 ### Check the status of the deployment you started
 * oc status
 
@@ -220,8 +227,8 @@ for config maps got to workloads-> config maps
 ### To create Blue Green Deployment
 
 
-* oc new-app adi4196/docker-service:v1 --name=blueversion
-* oc new-app adi4196/docker-service:v2 --name=greenversion
+* oc new-app quay.io/ashwinprakash25/docker-service:v1 --name=blueversion
+* oc new-app quay.io/ashwinprakash25/docker-service:v2 --name=greenversion
 
 * oc expose svc/blueversion --name=bluegreen
 
